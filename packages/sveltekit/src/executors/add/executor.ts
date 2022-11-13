@@ -1,5 +1,3 @@
-import { AddExecutorSchema } from './schema';
-import { default as runCommands } from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
 import {
   ExecutorContext,
   getPackageManagerCommand,
@@ -8,6 +6,8 @@ import {
   writeJsonFile,
 } from '@nrwl/devkit';
 import { sortObjectByKeys } from '@nrwl/workspace/src/utils/ast-utils';
+import { default as runCommands } from 'nx/src/executors/run-commands/run-commands.impl';
+import { AddExecutorSchema } from './schema';
 
 export default async function runExecutor(
   options: AddExecutorSchema,
@@ -33,6 +33,7 @@ export default async function runExecutor(
       cwd: projectRoot,
       parallel: false,
       color: true,
+      __unparsed__: [],
     },
     context
   );
@@ -57,6 +58,7 @@ export default async function runExecutor(
       command: getPackageManagerCommand().install,
       parallel: false,
       color: true,
+      __unparsed__: [],
     },
     context
   );

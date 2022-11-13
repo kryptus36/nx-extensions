@@ -1,9 +1,19 @@
 ---
-home: true
-heroImage: /logo.svg
-actionText: Get Started
-actionLink: /docs/nxext/overview
+layout: home
 
+title: Nxext
+titleTemplate: Nxext brings different tools to Nx
+
+hero:
+  name: Nxext
+  tagline: Nxext brings different tools Nx
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /docs/nxext/overview
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/nxext/nx-extensions
 
 features:
   - title: StencilJs
@@ -18,5 +28,4 @@ features:
     details: Next Generation Frontend Tooling
   - title: React
     details: A JavaScript library for building user interfaces.
-footer: MIT Licensed | Copyright © 2020-present Nxext Developers & Contributors
 ---

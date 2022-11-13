@@ -9,7 +9,7 @@ import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-ser
 import { NormalizedSchema } from '../schema';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
-  if(options.linter === 'none') {
+  if (options.linter === 'none') {
     return runTasksInSerial();
   }
 

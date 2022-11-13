@@ -1,11 +1,11 @@
 import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
-import {
-  NormalizedSchema,
-  NormalizedSchema as LibrarySchema,
-} from '../library/schema';
 import { NormalizedSchema as ApplicationSchema } from '../application/schema';
+import { NormalizedSchema as LibrarySchema } from '../library/schema';
 
-export function createViteTargets(projectType: ProjectType, options: LibrarySchema | ApplicationSchema): {
+export function createViteTargets(
+  projectType: ProjectType,
+  options: LibrarySchema | ApplicationSchema
+): {
   [key: string]: TargetConfiguration;
 } {
   return {
@@ -79,7 +79,7 @@ export function createSvelteCheckTarget(
   options: LibrarySchema | ApplicationSchema
 ): TargetConfiguration {
   return {
-    executor: '@nrwl/workspace:run-commands',
+    executor: 'nx:run-commands',
     options: {
       command: 'svelte-check',
       cwd: options.projectRoot,

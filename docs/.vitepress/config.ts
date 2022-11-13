@@ -1,61 +1,105 @@
 import { defineConfig } from 'vitepress';
 
 export default defineConfig({
+  lang: 'en-US',
   title: 'Nxext',
-  description: 'Nxext brings different tools Nx',
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  description: 'Nxext brings different tools to Nx',
   outDir: '../dist/docs',
-  vue: {
-    reactivityTransform: true,
-  },
-  themeConfig: {
-    repo: 'nxext/nx-extensions',
-    logo: '/logo.svg',
-    docsDir: 'docs',
-    docsBranch: 'main',
-    editLinks: true,
-    editLinkText: 'Suggest changes to this page',
 
-    nav: [
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Docs', link: '/docs/nxext/overview' },
-      {
-        text: 'Links',
-        items: [
-          {
-            text: 'Twitter',
-            link: 'https://twitter.com/nxext_dev',
-          },
-          {
-            text: 'Discord Chat',
-            link: 'https://discord.gg/Hqjp9NrZQ7',
-          },
-        ],
-      },
-    ],
+  themeConfig: {
+    siteTitle: 'Nxext',
+    logo: '/logo.svg',
+    nav: nav(),
 
     sidebar: {
-      '/docs/': [
+      '/guide/': sideNavGuide(),
+      '/docs/': sideNavDocs(),
+    },
+
+    footer: {
+      message:
+        'MIT Licensed | Copyright © 2020-present Nxext Developers & Contributors',
+      copyright:
+        '<a href="https://www.netlify.com"> <img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /> </a>',
+    },
+  },
+});
+
+function nav() {
+  return [
+    { text: 'Guide', link: '/guide/' },
+    { text: 'Docs', link: '/docs/nxext/overview' },
+    {
+      text: 'Links',
+      items: [
         {
-          text: 'Nxext',
-          children: [
-            {
-              text: 'Overview',
-              link: '/docs/nxext/overview',
-            },
-            {
-              text: 'Community',
-              link: '/docs/nxext/community',
-            },
-            {
-              text: 'Contributing',
-              link: '/docs/nxext/contributing',
-            },
-          ],
+          text: 'Twitter',
+          link: 'https://twitter.com/nxext_dev',
         },
         {
+          text: 'Discord Chat',
+          link: 'https://discord.gg/Hqjp9NrZQ7',
+        },
+      ],
+    },
+  ];
+}
+
+function sideNavGuide() {
+  return [
+    {
+      text: 'Guide',
+      items: [
+        {
+          text: 'Getting Started',
+          link: '/guide/',
+        },
+        {
+          text: 'Articles',
+          link: '/guide/articles',
+        },
+      ],
+    },
+    {
+      text: 'Vite',
+      items: [
+        {
+          text: 'Environment variables',
+          link: '/guide/vite/environment-variables',
+        },
+      ],
+    },
+  ];
+}
+
+function sideNavDocs() {
+  return [
+    {
+      text: 'Nxext',
+      collapsible: true,
+      items: [
+        {
+          text: 'Overview',
+          link: '/docs/nxext/overview',
+        },
+        {
+          text: 'Community',
+          link: '/docs/nxext/community',
+        },
+        {
+          text: 'Contributing',
+          link: '/docs/nxext/contributing',
+        },
+      ],
+    },
+    {
+      text: 'Ionic projects',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
           text: 'Stencil',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/stencil/overview',
@@ -75,8 +119,90 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Capacitor',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/capacitor/overview',
+            },
+            {
+              text: 'Migrating from Nxtend',
+              link: '/docs/capacitor/migrating-from-nxtend',
+            },
+            {
+              text: 'Getting started',
+              link: '/docs/capacitor/getting-started',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/capacitor/generators',
+            },
+            {
+              text: 'Executors',
+              link: '/docs/capacitor/executors',
+            },
+          ],
+        },
+        {
+          text: 'Ionic Angular',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/ionic-angular/overview',
+            },
+            {
+              text: 'Migrating from Nxtend',
+              link: '/docs/ionic-angular/migrating-from-nxtend',
+            },
+            {
+              text: 'Getting started',
+              link: '/docs/ionic-angular/getting-started',
+            },
+            {
+              text: 'Capacitor',
+              link: '/docs/ionic-angular/capacitor',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/ionic-angular/generators',
+            },
+          ],
+        },
+        {
+          text: 'Ionic React',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/ionic-react/overview',
+            },
+            {
+              text: 'Migrating from Nxtend',
+              link: '/docs/ionic-react/migrating-from-nxtend',
+            },
+            {
+              text: 'Getting started',
+              link: '/docs/ionic-react/getting-started',
+            },
+            {
+              text: 'Capacitor',
+              link: '/docs/ionic-react/capacitor',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/ionic-react/generators',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      text: 'Vite projects',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
           text: 'Vite',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/vite/overview',
@@ -97,7 +223,7 @@ export default defineConfig({
         },
         {
           text: 'Svelte',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/svelte/overview',
@@ -114,7 +240,7 @@ export default defineConfig({
         },
         {
           text: 'React',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/react/overview',
@@ -131,7 +257,7 @@ export default defineConfig({
         },
         {
           text: 'Preact',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/preact/overview',
@@ -148,7 +274,7 @@ export default defineConfig({
         },
         {
           text: 'Solid',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/solid/overview',
@@ -165,7 +291,7 @@ export default defineConfig({
         },
         {
           text: 'Vitest',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/vitest/overview',
@@ -184,9 +310,16 @@ export default defineConfig({
             },
           ],
         },
+      ],
+    },
+    {
+      text: 'Unstable/Alpha projects',
+      collapsible: true,
+      collapsed: true,
+      items: [
         {
           text: 'Angular',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/angular/overview',
@@ -197,13 +330,13 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              link: '/docs/angular/nx/generators',
+              link: '/docs/angular/generators',
             },
           ],
         },
         {
           text: 'Sveltekit',
-          children: [
+          items: [
             {
               text: 'Overview',
               link: '/docs/sveltekit/overview',
@@ -214,36 +347,15 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              link: '/docs/sveltekit/generators',
+              link: '/docs/vitest/generators',
             },
             {
               text: 'Executors',
-              link: '/docs/sveltekit/executors',
-            },
-          ],
-        },
-      ],
-      // catch-all fallback
-      '/': [
-        {
-          text: 'Guide',
-          children: [
-            {
-              text: 'Getting Started',
-              link: '/guide/',
-            },
-          ],
-        },
-        {
-          text: 'Vite',
-          children: [
-            {
-              text: 'Environment variables',
-              link: '/guide/vite/environment-variables',
+              link: '/docs/vitest/executors',
             },
           ],
         },
       ],
     },
-  },
-});
+  ];
+}

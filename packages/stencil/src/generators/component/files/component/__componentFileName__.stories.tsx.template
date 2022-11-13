@@ -1,0 +1,11 @@
+import { h } from '@stencil/core';
+
+export default {
+  title: '<%= className %>',
+  component: <%= className %> 
+};
+
+const Template = (args) => <<%= componentFileName %> {...args}></<%= componentFileName %>>;
+
+export const Primary = Template.bind({});
+Primary.args = { first: 'Hello', last: 'World' };

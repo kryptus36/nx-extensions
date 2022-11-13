@@ -1,0 +1,34 @@
+{
+  "name": "@nxext/capacitor",
+  "version": "15.0.1",
+  "description": "An Nx plugin for developing cross-platform applications using Capacitor",
+  "author": {
+    "name": "Devin Shoemaker",
+    "email": "devinshoe@gmail.com"
+  },
+  "homepage": "https://nxtend.dev/docs/capacitor/getting-started",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nxtend-team/nxtend.git"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  },
+  "schematics": "./generators.json",
+  "builders": "./executors.json",
+  "ng-update": {
+    "requirements": {},
+    "migrations": "./migrations.json"
+  },
+  "dependencies": {
+    "@nrwl/devkit": "^15.0.10"
+  },
+  "peerDependencies": {
+    "@nrwl/workspace": "^15.0.10",
+    "nx": "^15.0.10"
+  }
+}

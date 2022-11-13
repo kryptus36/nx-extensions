@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/solid:application
 
 Solid application schematic

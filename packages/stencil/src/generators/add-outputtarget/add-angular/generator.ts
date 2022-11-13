@@ -4,13 +4,16 @@ import {
   convertNxGenerator,
   getWorkspaceLayout,
   joinPathFragments,
-  logger,
   readProjectConfiguration,
   Tree,
 } from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addImport, insertImport } from '../../../utils/ast-utils';
+import {
+  addAfterLastImport,
+  addImport,
+  insertImport,
+} from '../../../utils/ast-utils';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
 import { addToGitignore } from '../../../utils/utillities';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
@@ -23,6 +26,7 @@ import {
   addDeclarationToModule,
   addExportToModule,
 } from '../../../utils/angular-ast-utils';
+import { getProjectTsImportPath } from '../../storybook-configuration/generator';
 
 async function prepareAngularLibrary(
   host: Tree,
@@ -135,7 +139,20 @@ function addLibraryDirectives(
     '...DIRECTIVES'
   );
   sourceFile = addExportToModule(host, sourceFile, modulePath, '...DIRECTIVES');
-  logger.info(host.read(modulePath, 'utf-8'));
+
+  sourceFile = insertImport(
+    host,
+    sourceFile,
+    modulePath,
+    'defineCustomElements',
+    `${getProjectTsImportPath(host, options.projectName)}/loader`
+  );
+
+  const changes = applyChangesToString(sourceFile.getFullText(), [
+    addAfterLastImport(sourceFile, `\ndefineCustomElements();\n`),
+  ]);
+
+  host.write(modulePath, changes);
 }
 
 export async function addAngularGenerator(

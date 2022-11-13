@@ -2,13 +2,14 @@ import {
   checkFilesExist,
   readJson,
   runNxCommandAsync,
+  updateFile,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '@nxext/e2e';
 
 describe('vite e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/vite', 'dist/packages/vite', []);
+    newProject(['@nxext/vite']);
   });
 
   describe('vite app', () => {
@@ -46,6 +47,41 @@ describe('vite e2e', () => {
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
       expect(result.stdout).toContain('All files pass linting');
+    });
+
+    it('should be able to build app with dependencies', async () => {
+      const appName = uniq('app');
+      await runNxCommandAsync(`generate @nxext/vite:app ${appName}`);
+
+      const libName = uniq('lib');
+      await runNxCommandAsync(`generate @nxext/vite:lib ${libName}`);
+
+      updateFile(
+        `apps/${appName}/src/main.ts`,
+        `
+import './style.css';
+import { testFun } from '@proj/${libName}';
+
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const app = document.querySelector<HTMLDivElement>('#app')!;
+
+app.innerHTML = \`
+  <h1>Hello Vite! \$\{testFun\}</h1>
+  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
+\`;
+      `
+      );
+      updateFile(
+        `libs/${libName}/src/index.ts`,
+        `
+export function testFun() {
+  return 'test';
+}
+      `
+      );
+
+      const result = await runNxCommandAsync(`build ${appName}`);
+      expect(result.stdout).toContain('Bundle complete');
     });
   });
 });

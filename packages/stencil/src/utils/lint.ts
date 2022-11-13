@@ -1,4 +1,7 @@
-import { eslintPluginImportVersion, eslintPluginStencilVersion } from './versions';
+import {
+  eslintPluginImportVersion,
+  eslintPluginStencilVersion,
+} from './versions';
 import type { Linter } from 'eslint';
 import { offsetFromRoot } from '@nrwl/devkit';
 
@@ -6,8 +9,8 @@ export const extraEslintDependencies = {
   dependencies: {},
   devDependencies: {
     'eslint-plugin-import': eslintPluginImportVersion,
-    '@stencil/eslint-plugin': eslintPluginStencilVersion
-  }
+    '@stencil/eslint-plugin': eslintPluginStencilVersion,
+  },
 };
 
 export const createStencilEslintJson = (

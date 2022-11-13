@@ -1,5 +1,4 @@
 {
-  "root": "packages/preact",
   "sourceRoot": "packages/preact/src",
   "projectType": "library",
   "generators": {},
@@ -13,17 +12,19 @@
           "packages/preact/**/*.spec.tsx",
           "packages/preact/**/*.spec.js",
           "packages/preact/**/*.spec.jsx",
-          "packages/preact/**/*.d.ts"
+          "packages/preact/**/*.d.ts",
+          "packages/preact/generators.json",
+          "packages/preact/package.json"
         ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "packages/preact/jest.config.js",
+        "jestConfig": "packages/preact/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/packages/preact"]
+      "outputs": ["{workspaceRoot}/coverage/packages/preact"]
     },
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -32,6 +33,7 @@
         "tsConfig": "packages/preact/tsconfig.lib.json",
         "packageJson": "packages/preact/package.json",
         "main": "packages/preact/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/preact/*.md",
           {

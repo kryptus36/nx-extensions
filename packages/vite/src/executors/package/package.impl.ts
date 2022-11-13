@@ -22,9 +22,9 @@ async function ensureUserConfig(
   mode: string
 ): Promise<UserConfig> {
   if (typeof config === 'function') {
-    return await Promise.resolve(config({ command: 'build', mode }));
+    return config({ command: 'build', mode });
   }
-  return await Promise.resolve(config);
+  return config;
 }
 
 export default async function runExecutor(
@@ -37,6 +37,7 @@ export default async function runExecutor(
   const viteBaseConfig = await ensureUserConfig(
     baseConfig({
       entry: options.entryFile,
+      workspaceRoot: context.root,
       external: options.external ?? [],
       globals: options.globals ?? {},
       name: names(context.projectName).fileName,
@@ -55,10 +56,7 @@ export default async function runExecutor(
     {
       root: projectRoot,
       build: {
-        outDir: relative(
-          projectRoot,
-          joinPathFragments(`${context.root}/dist/${projectDir}`)
-        ),
+        outDir: relative(projectRoot, options.outputPath),
         emptyOutDir: true,
         reportCompressedSize: true,
         cssCodeSplit: true,
@@ -77,18 +75,12 @@ export default async function runExecutor(
   await copyFile(
     joinPathFragments(options.packageJson ?? `${projectRoot}/package.json`),
     joinPathFragments(
-      `${context.root}/dist/${projectDir}/${
-        options.packageJson ?? 'package.json'
-      }`
+      `${options.outputPath}/${options.packageJson ?? 'package.json'}`
     )
   );
 
   if (options.assets) {
-    copyAssets(
-      options.assets,
-      context.root,
-      joinPathFragments(context.root, 'dist', projectDir)
-    );
+    await copyAssets(options.assets, context.root, options.outputPath);
   }
 
   logger.info('Bundle complete.');

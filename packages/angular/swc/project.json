@@ -1,5 +1,4 @@
 {
-  "root": "packages/angular/swc",
   "sourceRoot": "packages/angular/swc/src",
   "projectType": "library",
   "targets": {
@@ -53,7 +52,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/angular/swc"],
       "options": {
-        "jestConfig": "packages/angular/swc/jest.config.js",
+        "jestConfig": "packages/angular/swc/jest.config.ts",
         "passWithNoTests": true
       }
     }

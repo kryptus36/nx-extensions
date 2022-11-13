@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/svelte:application
 
 Svelte application schematic
@@ -324,7 +320,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint`, `none`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 

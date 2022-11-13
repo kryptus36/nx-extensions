@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/vitest:vitest
 
 vitest executor
@@ -9,12 +5,6 @@ vitest executor
 Options can be configured in the 'project.json' when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
 
 ### Options
-
-#### command (_**required**_)
-
-Type: `string`
-
-Vitest command to run
 
 #### passWithNoTests
 
@@ -29,3 +19,11 @@ Pass the build if no tests are found
 Type: `string`
 
 Pattern to match test names
+
+#### vitestMode
+
+Default: `test`
+
+Type: `string`
+
+Possible values: `test`, `benchmark`

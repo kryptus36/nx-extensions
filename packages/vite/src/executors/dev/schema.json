@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "title": "Dev executor",
@@ -17,6 +19,10 @@
       "type": "string",
       "description": "The path to vite.config.js for the framework.",
       "hidden": true
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The output path of the generated files."
     },
     "proxyConfig": {
       "type": "string",

@@ -1,6 +1,6 @@
-import Theme from 'vitepress/theme';
-import './custom.css';
+import DefaultTheme from 'vitepress/theme';
+import './vars.css';
 
 export default {
-  ...Theme,
+  ...DefaultTheme,
 };

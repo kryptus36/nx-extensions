@@ -1,4 +1,4 @@
-export const viteVersion = '^2.9.5';
+export const viteVersion = '^3.1.8';
 
-export const eslintPluginImportVersion = '2.25.2';
-export const eslintPluginViteVersion = '1.3.0';
+export const eslintPluginImportVersion = '^2.26.0';
+export const eslintPluginViteVersion = '^1.6.0';

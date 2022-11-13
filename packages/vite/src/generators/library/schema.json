@@ -29,14 +29,14 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint", "tslint"],
+      "enum": ["eslint", "none"],
       "default": "eslint"
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": ["vitest", "jest", "none"],
       "description": "Test runner to use for unit tests.",
-      "default": "jest"
+      "default": "vitest"
     },
     "tags": {
       "type": "string",

@@ -1,5 +1,4 @@
 {
-  "root": "packages/stencil",
   "sourceRoot": "packages/stencil/src",
   "projectType": "library",
   "generators": {},
@@ -13,17 +12,21 @@
           "packages/stencil/**/*.spec.tsx",
           "packages/stencil/**/*.spec.js",
           "packages/stencil/**/*.spec.jsx",
-          "packages/stencil/**/*.d.ts"
+          "packages/stencil/**/*.d.ts",
+          "packages/stencil/generators.json",
+          "packages/stencil/executors.json",
+          "packages/stencil/package.json",
+          "packages/stencil/migrations.json"
         ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "packages/stencil/jest.config.js",
+        "jestConfig": "packages/stencil/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/packages/stencil"]
+      "outputs": ["{workspaceRoot}/coverage/packages/stencil"]
     },
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -32,6 +35,7 @@
         "tsConfig": "packages/stencil/tsconfig.lib.json",
         "packageJson": "packages/stencil/package.json",
         "main": "packages/stencil/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/stencil/*.md",
           {

@@ -1,5 +1,4 @@
 {
-  "root": "packages/vitest",
   "sourceRoot": "packages/vitest/src",
   "projectType": "library",
   "targets": {
@@ -7,14 +6,19 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/vitest/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/vitest/**/*.ts",
+          "packages/vitest/generators.json",
+          "packages/vitest/executors.json",
+          "packages/vitest/package.json"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/vitest"],
+      "outputs": ["{workspaceRoot}/coverage/packages/vitest"],
       "options": {
-        "jestConfig": "packages/vitest/jest.config.js",
+        "jestConfig": "packages/vitest/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -26,6 +30,7 @@
         "tsConfig": "packages/vitest/tsconfig.lib.json",
         "packageJson": "packages/vitest/package.json",
         "main": "packages/vitest/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/vitest/*.md",
           {

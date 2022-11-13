@@ -1,5 +1,7 @@
 # path to a directory with all packages
-storage: ../build/local-registry/storage
+storage: ../tmp/local-registry/storage
+
+listen: localhost:4872
 
 auth:
   htpasswd:
@@ -9,33 +11,34 @@ auth:
 uplinks:
   npmjs:
     url: https://registry.npmjs.org/
-    cache: true
+    max_fails: 100
+    maxage: 30m
+    fail_timeout: 10m
+    timeout: 600s
+    cache: false
   yarn:
     url: https://registry.yarnpkg.com
-    cache: true
+    max_fails: 100
+    maxage: 30m
+    fail_timeout: 10m
+    timeout: 600s
+    cache: false
 
 packages:
   '@*/*':
-    # scoped packages
     access: $all
     publish: $all
     unpublish: $all
     proxy: npmjs
 
   '**':
-    # allow all users (including non-authenticated users) to read and
-    # publish all packages
     access: $all
-
-    # allow all users (including non-authenticated users) to publish/publish packages
     publish: $all
     unpublish: $all
-
-    # if package is not available locally, proxy requests to 'yarn' registry
     proxy: npmjs
 
 # log settings
 logs:
   type: stdout
   format: pretty
-  level: http
+  level: warn

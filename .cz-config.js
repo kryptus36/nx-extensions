@@ -16,6 +16,7 @@ module.exports = {
 
   scopes: [
     { name: 'nxext', description: 'Whole repo' },
+    { name: 'docs', description: 'Docs specific' },
     { name: 'stencil', description: 'Stencil specific' },
     { name: 'svelte', description: 'Svelte specific' },
     { name: 'sveltekit', description: 'Sveltekit specific' },
@@ -24,6 +25,10 @@ module.exports = {
     { name: 'solid', description: 'SolidJS specific' },
     { name: 'react', description: 'ReactJS specific' },
     { name: 'angular', description: 'Angular specific' },
+    { name: 'ts.ed', description: 'ts.ed specific' },
+    { name: 'capacitor', description: 'capacitor specific' },
+    { name: 'ionic-angular', description: 'ionic-angular specific' },
+    { name: 'ionic-react', description: 'ionic-react specific' },
   ],
 
   allowTicketNumber: true,

@@ -1,11 +1,11 @@
-export const stencilVersion = '^2.15.0';
+export const stencilVersion = '2.17.1';
 export const stencilRouterVersion = '^1.0.1';
-export const ionicVersion = '^6.0.16';
+export const ionicVersion = '^6.2.0';
 
 export const autoprefixerVersion = '^9.7.6';
 export const autoprefixerTypesVersion = '^9.7.2';
 
-export const puppeteer = '^13.5.2';
+export const puppeteer = '^15.5.0';
 
 export const eslintPluginImportVersion = '2.22.1';
 export const eslintPluginStencilVersion = '0.3.1';
@@ -15,7 +15,7 @@ export const STENCIL_OUTPUTTARGET_VERSION: {
 } = {
   react: '^0.3.1',
   angular: '^0.4.0',
-  vue: '^0.6.0',
+  vue: '^0.6.2',
   svelte: '^0.0.3',
 };
 

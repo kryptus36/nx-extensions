@@ -1,6 +1,6 @@
 {
   "name": "@nxext/angular",
-  "version": "13.0.0-alpha.2",
+  "version": "14.0.0-alpha.2",
   "license": "MIT",
   "author": "Jordan Hall",
   "description": "Nx plugin for Angular vite",
@@ -21,8 +21,8 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "@nxext/vite": "~13.2.4",
-    "@nrwl/angular": "~13.3.8",
+    "@nxext/vite": "^14.2.0",
+    "@nrwl/angular": "^14.0.3",
     "typescript": "~4.5.4",
     "@schematics/angular": "~13.1.1",
     "@nxext/angular-vite": "13.0.0-alpha.2"

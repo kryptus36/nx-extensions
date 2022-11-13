@@ -12,7 +12,9 @@ import {
   pathFormat,
 } from '@angular-devkit/schematics/src/formats';
 import {
+  createDocLink,
   formatDeprecated,
+  generateJsonFile,
   generateMarkdownFile,
   generateTsFile,
   sortAlphabeticallyFunction,
@@ -42,11 +44,10 @@ function readPackageName(root: string) {
   return readJsonSync(join(root, 'package.json')).name;
 }
 
-function generateSchematicList(
+function generateBuilderList(
   config: Configuration,
   flattener: SchemaFlattener
 ): Promise<FileSystemSchematicJsonDescription>[] {
-  removeSync(config.builderOutput);
   const builderCollection = readExecutorsJson(config.root);
   const packageName = readPackageName(config.root);
 
@@ -168,29 +169,24 @@ export async function generateExecutorsDocumentation() {
       .filter((item) => item.hasBuilders)
       .map(async (config) => {
         const buildersList = await Promise.all(
-          generateSchematicList(config, flattener)
+          generateBuilderList(config, flattener)
         );
 
         const markdownList = buildersList
           .filter((b) => b != null && !b['hidden'])
           .map((b) => generateTemplate(b));
 
-        await generateMarkdownFile(config.builderOutput, {
-          name: '../executors',
-          template: dedent`
----
-sidebarDepth: 3
----
-${markdownList.map((template) => template.template).join('\n\n')}
-        `,
+        await generateMarkdownFile(config.output, {
+          name: 'executors',
+          template: markdownList
+            .map((template) => template.template)
+            .join('\n'),
         });
 
         console.log(
           ` - Documentation for ${chalk.magenta(
             relative(process.cwd(), config.root)
-          )} generated at ${chalk.grey(
-            relative(process.cwd(), config.builderOutput)
-          )}`
+          )} generated at ${chalk.grey(relative(process.cwd(), config.output))}`
         );
       })
   );

@@ -4,8 +4,9 @@
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
     "declaration": true,
+    "esModuleInterop": true,
     "types": ["node"]
   },
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts", "jest.config.ts"],
   "include": ["**/*.ts"]
 }

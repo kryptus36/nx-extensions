@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/vitest:init
 
 init generator

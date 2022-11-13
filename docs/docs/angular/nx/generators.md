@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/angular:application
 
 Create an application

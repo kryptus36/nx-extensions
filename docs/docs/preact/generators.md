@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/preact:application
 
 preact application schematic

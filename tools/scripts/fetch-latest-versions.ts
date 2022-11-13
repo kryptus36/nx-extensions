@@ -1,4 +1,4 @@
-import { spawn, spawnSync } from 'child_process';
+import { spawnSync } from 'child_process';
 import {
   ionicVersion,
   puppeteer,
@@ -36,6 +36,7 @@ import {
   testingLibraryPreactVersion,
   vitePluginPreactVersion,
 } from '../../packages/preact/src/generators/utils/versions';
+import { capacitorVersion } from '../../packages/capacitor/src/utils/versions';
 
 console.log('======================================');
 console.log('Stencil:');
@@ -99,7 +100,7 @@ console.log('======================================');
 
 const vitePkgs = [
   { pkg: 'vite', version: viteVersion },
-  { pkg: 'vite-tsconfig-paths', version: '3.4.0' },
+  { pkg: 'tsconfig-paths', version: '3.14.1' },
 ];
 
 vitePkgs.forEach(({ pkg, version }) => {
@@ -159,6 +160,21 @@ const vitestPkgs = [
 ];
 
 vitestPkgs.forEach(({ pkg, version }) => {
+  checkVersion(pkg, version);
+});
+
+console.log('======================================');
+console.log('Capacitor:');
+console.log('======================================');
+
+const capacitorPkgs = [
+  { pkg: '@capacitor/core', version: capacitorVersion },
+  { pkg: '@capacitor/android', version: capacitorVersion },
+  { pkg: '@capacitor/ios', version: capacitorVersion },
+  { pkg: '@capacitor/cli', version: capacitorVersion },
+];
+
+capacitorPkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
 

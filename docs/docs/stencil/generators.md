@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/stencil:application
 
 Generate Stencil application
@@ -276,7 +272,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 
@@ -472,15 +468,15 @@ nx g make-lib-buildable ... --dry-run
 
 ### Options
 
-#### importPath (_**required**_)
+#### name (_**required**_)
+
+Type: `string`
+
+#### importPath
 
 Type: `string`
 
 The library name used to import it, like @myorg/my-awesome-lib
-
-#### name (_**required**_)
-
-Type: `string`
 
 #### style
 
@@ -544,7 +540,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint`, `none`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 

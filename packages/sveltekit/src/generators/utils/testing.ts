@@ -25,7 +25,7 @@ export async function createTestProject(
   await applicationGenerator(tree, {
     name: name,
     linter: Linter.EsLint,
-    skipFormat: false
+    skipFormat: false,
   });
 
   return tree;

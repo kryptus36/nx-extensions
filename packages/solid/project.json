@@ -1,5 +1,4 @@
 {
-  "root": "packages/solid",
   "sourceRoot": "packages/solid/src",
   "projectType": "library",
   "generators": {},
@@ -13,17 +12,19 @@
           "packages/solid/**/*.spec.tsx",
           "packages/solid/**/*.spec.js",
           "packages/solid/**/*.spec.jsx",
-          "packages/solid/**/*.d.ts"
+          "packages/solid/**/*.d.ts",
+          "packages/solid/generators.json",
+          "packages/solid/package.json"
         ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "packages/solid/jest.config.js",
+        "jestConfig": "packages/solid/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/packages/solid"]
+      "outputs": ["{workspaceRoot}/coverage/packages/solid"]
     },
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -32,6 +33,7 @@
         "tsConfig": "packages/solid/tsconfig.lib.json",
         "packageJson": "packages/solid/package.json",
         "main": "packages/solid/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/solid/*.md",
           {

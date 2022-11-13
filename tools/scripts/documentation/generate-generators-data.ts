@@ -11,7 +11,9 @@ import {
   pathFormat,
 } from '@angular-devkit/schematics/src/formats';
 import {
+  createDocLink,
   formatDeprecated,
+  generateJsonFile,
   generateMarkdownFile,
   generateTsFile,
   sortAlphabeticallyFunction,
@@ -24,7 +26,7 @@ import {
 import { parseJsonSchemaToOptions } from './json-parser';
 import { createSchemaFlattener, SchemaFlattener } from './schema-flattener';
 import { inspect } from 'util';
-import { join, relative } from 'path';
+import { join } from 'path';
 
 /**
  * @WhatItDoes: Generates default documentation from the schematics' schema.
@@ -41,7 +43,6 @@ function generateGeneratorList(
 ): Promise<FileSystemSchematicJsonDescription>[] {
   const schematicCollectionFilePath = path.join(config.root, 'generators.json');
   const schematicCollectionFile = readJsonSync(schematicCollectionFilePath);
-  removeSync(config.schematicOutput);
   const schematicCollection =
     schematicCollectionFile.schematics || schematicCollectionFile.generators;
   return Object.keys(schematicCollection).map((schematicName) => {
@@ -189,21 +190,18 @@ export async function generateGeneratorsDocumentation() {
           .filter((s) => s != null && !s['hidden'])
           .map((s_1) => generateTemplate(s_1));
 
-        await generateMarkdownFile(config.builderOutput, {
-          name: '../generators',
-          template: dedent`
----
-sidebarDepth: 3
----
-${markdownList.map((template) => template.template).join('\n\n')}
-        `,
+        await generateMarkdownFile(config.output, {
+          name: 'generators',
+          template: markdownList
+            .map((template) => template.template)
+            .join('\n'),
         });
 
         console.log(
           ` - Documentation for ${chalk.magenta(
             path.relative(process.cwd(), config.root)
           )} generated at ${chalk.grey(
-            path.relative(process.cwd(), config.schematicOutput)
+            path.relative(process.cwd(), config.output)
           )}`
         );
       })

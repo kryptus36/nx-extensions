@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/ts.ed:application
 
 Ts.ED application schematic

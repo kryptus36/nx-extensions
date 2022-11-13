@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/vite:build
 
 build executor
@@ -46,6 +42,20 @@ Type: `string`
 
 The path to vite.config.js for the framework.
 
+#### outputPath
+
+Type: `string`
+
+The output path of the generated files.
+
+#### sourcemaps
+
+Default: `false`
+
+Type: `boolean`
+
+enable sourcemap
+
 ## @nxext/vite:dev
 
 dev executor
@@ -89,6 +99,12 @@ The file to replace with.
 Type: `string`
 
 The path to vite.config.js for the framework.
+
+#### outputPath
+
+Type: `string`
+
+The output path of the generated files.
 
 #### proxyConfig
 

@@ -1,5 +1,4 @@
 {
-  "root": "packages/ts.ed",
   "sourceRoot": "packages/ts.ed/src",
   "projectType": "library",
   "targets": {
@@ -7,14 +6,18 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/ts.ed/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/ts.ed/**/*.ts",
+          "packages/ts.ed/generators.json",
+          "packages/ts.ed/package.json"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/ts.ed"],
+      "outputs": ["{workspaceRoot}/coverage/packages/ts.ed"],
       "options": {
-        "jestConfig": "packages/ts.ed/jest.config.js",
+        "jestConfig": "packages/ts.ed/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -26,6 +29,7 @@
         "tsConfig": "packages/ts.ed/tsconfig.lib.json",
         "packageJson": "packages/ts.ed/package.json",
         "main": "packages/ts.ed/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/ts.ed/*.md",
           {

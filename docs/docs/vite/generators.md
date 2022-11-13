@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/vite:application
 
 Create a vite application
@@ -54,7 +50,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 
@@ -122,11 +118,11 @@ Add tags to the application (used for linting).
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `vitest`, `jest`, `none`
 
 Test runner to use for unit tests.
 
@@ -202,7 +198,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 
@@ -270,10 +266,10 @@ Add tags to the library (used for linting).
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `vitest`, `jest`, `none`
 
 Test runner to use for unit tests.

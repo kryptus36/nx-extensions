@@ -1,6 +1,6 @@
 {
-  "projectName": "nxext",
-  "projectOwner": "Dominik Pieper",
+  "projectName": "nx-extensions",
+  "projectOwner": "nxext",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -22,7 +22,7 @@
         "infra",
         "maintenance"
       ]
-     },
+    },
     {
       "login": "Mobiletainment",
       "name": "David Pertiller",
@@ -161,6 +161,26 @@
       "contributions": [
         "code",
         "ideas"
+      ]
+    },
+    {
+      "login": "devinshoemaker",
+      "name": "Devin Shoemaker",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1919548?v=4",
+      "profile": "https://github.com/devinshoemaker",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "LayZeeDK",
+      "name": "Lars Gyrup Brink Nielsen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6364586?v=4",
+      "profile": "https://dev.to/layzee",
+      "contributions": [
+        "code",
+        "infra"
       ]
     }
   ],

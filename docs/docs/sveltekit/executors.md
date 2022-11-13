@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/sveltekit:sveltekit
 
 sveltekit executor

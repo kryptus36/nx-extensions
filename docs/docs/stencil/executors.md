@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/stencil:build
 
 stencil build

@@ -1,5 +1,4 @@
 {
-  "root": "packages/angular/vite",
   "sourceRoot": "packages/angular/vite/src",
   "projectType": "library",
   "targets": {
@@ -53,7 +52,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/angular/vite"],
       "options": {
-        "jestConfig": "packages/angular/vite/jest.config.js",
+        "jestConfig": "packages/angular/vite/jest.config.ts",
         "passWithNoTests": true
       }
     }

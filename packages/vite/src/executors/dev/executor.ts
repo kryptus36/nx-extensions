@@ -6,10 +6,12 @@ import {
   UserConfigExport,
   ProxyOptions,
   createServer,
-  mergeConfig, ViteDevServer
+  mergeConfig,
+  ViteDevServer,
+  searchForWorkspaceRoot,
 } from 'vite';
 import { join, relative } from 'path';
-import baseConfig from '../../../plugins/vite';
+import { defineBaseConfig } from '../../../plugins/vite';
 import { replaceFiles } from '../../../plugins/file-replacement';
 import { existsSync } from 'fs';
 import { Observable } from 'rxjs';
@@ -20,9 +22,9 @@ async function ensureUserConfig(
   mode: string
 ): Promise<UserConfig> {
   if (typeof config === 'function') {
-    return await Promise.resolve(config({ command: 'build', mode }));
+    return config({ command: 'build', mode });
   }
-  return await Promise.resolve(config);
+  return config;
 }
 
 export default async function* runExecutor(
@@ -31,7 +33,7 @@ export default async function* runExecutor(
 ) {
   const projectDir = context.workspace.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
-
+  const baseConfig = defineBaseConfig(context.root);
   const viteBaseConfig = await ensureUserConfig(
     baseConfig,
     context.configurationName
@@ -60,25 +62,28 @@ export default async function* runExecutor(
         options.configFile === '@nxext/vite/plugins/vite'
           ? false
           : options.configFile
-            ? joinPathFragments(`${context.root}/${options.configFile}`)
-            : undefined,
+          ? joinPathFragments(`${context.root}/${options.configFile}`)
+          : undefined,
       base: options.baseHref ?? '/',
       root: projectRoot,
       build: {
-        outDir: relative(
-          projectRoot,
-          joinPathFragments(`${context.root}/dist/${projectDir}`)
-        ),
+        outDir: relative(projectRoot, options.outputPath),
         emptyOutDir: true,
         reportCompressedSize: true,
         cssCodeSplit: true,
         rollupOptions: {
-          plugins: [replaceFiles(options.fileReplacements)]
-        }
+          plugins: [replaceFiles(options.fileReplacements)],
+        },
       },
       server: {
-        proxy: proxyConfig
-      }
+        proxy: proxyConfig,
+        fs: {
+          allow: [
+            searchForWorkspaceRoot(joinPathFragments(projectRoot)),
+            joinPathFragments(context.root, 'node_modules/vite'),
+          ],
+        },
+      },
     } as InlineConfig
   );
 
@@ -86,23 +91,29 @@ export default async function* runExecutor(
   return yield* eachValueFrom(runViteDevServer(server));
 }
 
-export function runViteDevServer(server: ViteDevServer): Observable<{ success: boolean, baseUrl: string }> {
-  return new Observable(subscriber => {
+export function runViteDevServer(
+  server: ViteDevServer
+): Observable<{ success: boolean; baseUrl: string }> {
+  return new Observable((subscriber) => {
     let devServer: ViteDevServer;
 
     try {
-      server.listen().then(dev => {
-        devServer = dev;
-        const protocol = devServer.config.server.https ? 'https' : 'http';
-        const hostname = resolveHostname(devServer.config.server.host);
-        const serverBase = hostname.host === '127.0.0.1' ? hostname.name : hostname.host;
-        const baseUrl = `${protocol}://${serverBase}:${devServer.config.server.port}`;
-        server.printUrls();
+      server
+        .listen()
+        .then((dev) => {
+          devServer = dev;
+          const protocol = devServer.config.server.https ? 'https' : 'http';
+          const hostname = resolveHostname(devServer.config.server.host);
+          const serverBase =
+            hostname.host === '127.0.0.1' ? hostname.name : hostname.host;
+          const baseUrl = `${protocol}://${serverBase}:${devServer.config.server.port}`;
+          server.printUrls();
 
-        subscriber.next({ success: true, baseUrl });
-      }).catch(err => {
-        subscriber.error(err);
-      });
+          subscriber.next({ success: true, baseUrl });
+        })
+        .catch((err) => {
+          subscriber.error(err);
+        });
 
       return async () => await devServer.close();
     } catch (err) {
@@ -112,9 +123,7 @@ export function runViteDevServer(server: ViteDevServer): Observable<{ success: b
   });
 }
 
-export function resolveHostname(
-  optionsHost: string | boolean | undefined
-) {
+export function resolveHostname(optionsHost: string | boolean | undefined) {
   let host: string | undefined;
   if (
     optionsHost === undefined ||

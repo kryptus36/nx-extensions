@@ -1,92 +1,108 @@
 {
   "migrations": [
     {
-      "version": "13.9.0-beta.0",
-      "description": "Replace @nrwl/tao with nx",
       "cli": "nx",
-      "implementation": "./src/migrations/update-13-9-0/replace-tao-with-nx",
-      "package": "@nrwl/workspace",
-      "name": "13-9-0-replace-tao-with-nx"
-    },
-    {
-      "version": "13.10.0-beta.0",
-      "description": "Update the decorate-angular-cli script to require nx instead of @nrwl/cli",
-      "cli": "nx",
-      "implementation": "./src/migrations/update-13-10-0/update-decorate-cli",
-      "package": "@nrwl/workspace",
-      "name": "13-10-0-update-decorate-cli"
-    },
-    {
-      "version": "13.10.0-beta.0",
-      "description": "Update the tasks runner property to import it from the nx package instead of @nrwl/worksapce",
-      "cli": "nx",
-      "implementation": "./src/migrations/update-13-10-0/update-tasks-runner",
-      "package": "@nrwl/workspace",
-      "name": "13-10-0-update-tasks-runner"
+      "version": "15.0.0-beta.1",
+      "description": "Replace implicitDependencies with namedInputs + target inputs",
+      "implementation": "./src/migrations/update-15-0-0/migrate-to-inputs",
+      "package": "nx",
+      "name": "15.0.0-migrate-to-inputs"
     },
     {
       "cli": "nx",
-      "version": "13.8.4",
-      "description": "Karma coverage is broken since Angular 13 upgarde and the karma config is severely out of date. Bring it up to date fixing the coverage issue.",
-      "factory": "./src/migrations/update-13-8-4/migrate-karma-conf",
+      "version": "15.0.0-beta.1",
+      "description": "Prefix outputs with {workspaceRoot}/{projectRoot} if needed",
+      "implementation": "./src/migrations/update-15-0-0/prefix-outputs",
+      "package": "nx",
+      "name": "15.0.0-prefix-outputs"
+    },
+    {
+      "cli": "nx",
+      "version": "15.0.0-beta.0",
+      "description": "Rename @nrwl/angular:webpack-server executor to @nrwl/angular:webpack-dev-server",
+      "factory": "./src/migrations/update-14-8-0/rename-webpack-server",
       "package": "@nrwl/angular",
-      "name": "migrate-karma-config"
+      "name": "rename-webpack-server-executor"
     },
     {
       "cli": "nx",
-      "version": "13.9.0-beta.4",
-      "description": "Set buildLibsFromSource property to false to not break existing usage.",
-      "factory": "./src/migrations/update-13-9-0/set-build-libs-from-source",
+      "version": "15.0.0-beta.0",
+      "description": "Update the usages of @nrwl/angular/testing to import jasmine-marbles symbols from jasmine-marbles itself.",
+      "factory": "./src/migrations/update-15-0-0/switch-to-jasmine-marbles",
       "package": "@nrwl/angular",
-      "name": "set-build-libs-from-source"
+      "name": "switch-to-jasmine-marbles"
     },
     {
       "cli": "nx",
-      "version": "13.8.5-beta.1",
-      "description": "Renames @nrwl/js:node to @nrwl/node:node",
-      "factory": "./src/migrations/update-13-8-5/update-node-executor",
-      "package": "@nrwl/js",
-      "name": "update-node-executor"
+      "version": "15.0.0-beta.1",
+      "description": "Stop hashing karma spec files and config files for build targets and dependent tasks",
+      "factory": "./src/migrations/update-15-0-0/add-karma-inputs",
+      "package": "@nrwl/angular",
+      "name": "add-karma-inputs"
     },
     {
       "cli": "nx",
-      "version": "13.8.5-beta.1",
-      "description": "Adjust .swcrc to .lib.swcrc",
-      "factory": "./src/migrations/update-13-8-5/update-swcrc",
-      "package": "@nrwl/js",
-      "name": "update-swcrc"
+      "version": "15.0.0-beta.0",
+      "description": "Stop hashing cypress spec files and config files for build targets and dependent tasks",
+      "factory": "./src/migrations/update-15-0-0/add-cypress-inputs",
+      "package": "@nrwl/cypress",
+      "name": "add-cypress-inputs"
     },
     {
       "cli": "nx",
-      "version": "13.8.5-beta.1",
-      "description": "Renames @nrwl/node:build to @nrwl/node:webpack",
-      "factory": "./src/migrations/update-13-8-5/rename-build-to-webpack",
-      "package": "@nrwl/node",
-      "name": "rename-build-to-webpack"
+      "version": "15.0.0-beta.4",
+      "description": "Update to using cy.mount in the commands.ts file instead of importing mount for each component test file",
+      "factory": "./src/migrations/update-15-0-0/update-cy-mount-usage",
+      "package": "@nrwl/cypress",
+      "name": "update-cy-mount-usage"
+    },
+    {
+      "version": "15.0.0-beta.0",
+      "cli": "nx",
+      "description": "Stop hashing jest spec files and config files for build targets and dependent tasks",
+      "factory": "./src/migrations/update-15-0-0/add-jest-inputs",
+      "package": "@nrwl/jest",
+      "name": "add-jest-inputs"
     },
     {
       "cli": "nx",
-      "version": "13.8.5-beta.1",
-      "description": "Renames @nrwl/node:execute to @nrwl/node:node",
-      "factory": "./src/migrations/update-13-8-5/rename-execute-to-node",
-      "package": "@nrwl/node",
-      "name": "rename-execute-to-node"
+      "version": "15.0.0-beta.0",
+      "description": "Stop hashing eslint config files for build targets and dependent tasks",
+      "factory": "./src/migrations/update-15-0-0/add-eslint-inputs",
+      "package": "@nrwl/linter",
+      "name": "add-eslint-inputs"
     },
     {
       "cli": "nx",
-      "version": "13.8.5-beta.1",
-      "description": "Renames @nrwl/node:package to @nrwl/js:tsc",
-      "factory": "./src/migrations/update-13-8-5/update-package-to-tsc",
-      "package": "@nrwl/node",
-      "name": "update-package-to-tsc"
+      "version": "15.0.0-beta.0",
+      "description": "Migrates executor schema files to v2",
+      "factory": "./src/migrations/update-15-0-0/specify-output-capture",
+      "package": "@nrwl/nx-plugin",
+      "name": "update-15-0-0"
     },
     {
       "cli": "nx",
-      "version": "13.10.0-beta.0",
-      "description": "Update to React 18",
-      "factory": "./src/migrations/update-13-10-0/update-13-10-0",
-      "package": "@nrwl/react",
-      "name": "update-react-18-13.10.0"
+      "version": "15.0.0-beta.0",
+      "description": "Stop hashing storybook config files and story files for build targets and dependent tasks",
+      "factory": "./src/migrations/update-15-0-0/add-storybook-inputs",
+      "package": "@nrwl/storybook",
+      "name": "update-15.0.8-add-storybook-inputs"
+    },
+    {
+      "cli": "nx",
+      "version": "15.0.0-beta.0",
+      "description": "Adds babel.config.json to the hash of all tasks",
+      "factory": "./src/migrations/update-15-0-0/add-babel-inputs",
+      "package": "@nrwl/web",
+      "name": "add-babel-inputs"
+    },
+    {
+      "cli": "nx",
+      "version": "15.0.0-beta.1",
+      "description": "Update usages of rollup executors to @nrwl/rollup",
+      "factory": "./src/migrations/update-15-0-0/update-rollup-executor",
+      "package": "@nrwl/web",
+      "name": "update-rollup-executor"
     }
   ]
 }
